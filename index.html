@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💥 Взрывной Чууу</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #07080f;
+  --bg2:     #0c0e1a;
+  --bg3:     #12152a;
+  --bg4:     #1a1e35;
+  --gold:    #f5c842;
+  --gold2:   #e6a817;
+  --green:   #00d68f;
+  --red:     #ff4466;
+  --blue:    #4488ff;
+  --teal:    #00e5cc;
+  --white:   #f0f2ff;
+  --dim:     #3a4060;
+  --dim2:    #6070a0;
+  --usdt:    #26a17b;
+  --usdt2:   #1a7a5a;
+  --glow-g:  rgba(0,214,143,0.35);
+  --glow-r:  rgba(255,68,102,0.4);
+  --glow-gold: rgba(245,200,66,0.3);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:100%; height:100%; overflow:hidden; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  display: flex; flex-direction: column;
+  height: 100vh; user-select: none;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(68,136,255,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 80% 110%, rgba(0,214,143,0.06) 0%, transparent 60%);
+}
+
+/* ══ HEADER ══ */
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px;
+  height: 56px;
+  background: rgba(12,14,26,0.9);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  backdrop-filter: blur(20px);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 50;
+}
+
+.logo {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 16px; font-weight: 900;
+  letter-spacing: -0.5px;
+  display: flex; align-items: center; gap: 8px;
+}
+.logo-icon { font-size: 20px; animation: floatIcon 3s ease-in-out infinite; }
+@keyframes floatIcon { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
+.logo-text { background: linear-gradient(90deg, var(--gold), var(--teal)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+
+.header-center {
+  display: flex; gap: 4px;
+  background: var(--bg3);
+  border-radius: 8px;
+  padding: 3px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.htab {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.3px;
+  padding: 5px 12px; border-radius: 6px; cursor: pointer;
+  color: var(--dim2); transition: all 0.2s; border: none; background: none;
+  font-family: 'DM Sans', sans-serif;
+}
+.htab.active { background: var(--bg4); color: var(--white); }
+
+.balance-area {
+  display: flex; align-items: center; gap: 10px;
+}
+.bal-box {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg3); border: 1px solid rgba(38,161,123,0.25);
+  padding: 7px 14px; border-radius: 10px;
+  position: relative; overflow: hidden;
+}
+.bal-box::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(38,161,123,0.08), transparent);
+}
+.bal-icon { font-size: 14px; }
+.bal-num {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 14px; font-weight: 700;
+  color: var(--gold);
+  position: relative;
+}
+.bal-curr { font-size: 10px; color: var(--usdt); font-weight: 600; letter-spacing: 0.5px; }
+
+.add-btn {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--usdt), var(--usdt2));
+  border: none; color: white; font-size: 18px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 12px rgba(38,161,123,0.3);
+}
+.add-btn:hover { transform: scale(1.08); box-shadow: 0 4px 20px rgba(38,161,123,0.45); }
+
+/* ══ HISTORY ══ */
+.history-wrap {
+  background: rgba(12,14,26,0.7);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  padding: 0 16px;
+  height: 36px;
+  display: flex; align-items: center; gap: 6px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.hist-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--dim); margin-right: 4px; white-space: nowrap; }
+.hist-scroll { display: flex; gap: 5px; overflow-x: auto; scrollbar-width: none; flex: 1; }
+.hist-scroll::-webkit-scrollbar { display: none; }
+.hp {
+  flex-shrink: 0;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 10px; font-weight: 700;
+  padding: 3px 9px; border-radius: 20px;
+  animation: slideIn 0.3s ease;
+}
+@keyframes slideIn { from{opacity:0;transform:translateX(-10px)} to{opacity:1;transform:translateX(0)} }
+.hp-low  { background:rgba(255,68,102,0.12); color:#ff7088; border:1px solid rgba(255,68,102,0.2); }
+.hp-mid  { background:rgba(0,214,143,0.1);  color:#00d68f; border:1px solid rgba(0,214,143,0.2); }
+.hp-high { background:rgba(245,200,66,0.1); color:var(--gold); border:1px solid rgba(245,200,66,0.25); }
+.hp-moon { background:rgba(0,229,204,0.1);  color:var(--teal); border:1px solid rgba(0,229,204,0.25); }
+
+/* ══ MAIN LAYOUT ══ */
+.main {
+  flex: 1; display: grid;
+  grid-template-columns: 1fr 320px;
+  overflow: hidden; min-height: 0;
+}
+
+/* ══ GAME AREA ══ */
+.game-area {
+  position: relative; overflow: hidden;
+  background: radial-gradient(ellipse 100% 100% at 50% 100%, rgba(68,136,255,0.04) 0%, transparent 70%);
+}
+
+#gc { position:absolute; inset:0; width:100%; height:100%; }
+
+/* Multiplier */
+.mult-wrap {
+  position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
+  text-align: center; pointer-events: none; z-index: 10;
+  transition: opacity 0.3s;
+}
+.mult-num {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(44px, 7vw, 80px);
+  font-weight: 900; line-height: 1;
+  letter-spacing: -2px;
+  filter: drop-shadow(0 0 20px currentColor);
+  transition: color 0.2s;
+}
+.mult-tag {
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--dim2); margin-top: 6px;
+  font-weight: 500;
+}
+
+/* Crash screen */
+.crash-screen {
+  position: absolute; inset: 0; z-index: 20;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.4s;
+  background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(255,68,102,0.1) 0%, transparent 70%);
+}
+.crash-screen.show { opacity: 1; }
+
+.crash-emoji { font-size: 72px; animation: crashPop 0.5s cubic-bezier(0.36,0.07,0.19,0.97); }
+@keyframes crashPop {
+  0%{transform:scale(0.3) rotate(-10deg);opacity:0}
+  60%{transform:scale(1.3) rotate(5deg)}
+  100%{transform:scale(1) rotate(0);opacity:1}
+}
+.crash-label {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(32px, 5vw, 56px); font-weight: 900;
+  color: var(--red); letter-spacing: -1px; margin-top: 8px;
+  text-shadow: 0 0 40px rgba(255,68,102,0.6);
+  animation: crashIn 0.4s 0.1s ease both;
+}
+@keyframes crashIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+.crash-at {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 18px; color: rgba(255,100,120,0.7);
+  margin-top: 4px; font-weight: 600;
+  animation: crashIn 0.4s 0.2s ease both;
+}
+
+/* Wait screen */
+.wait-screen {
+  position: absolute; inset: 0; z-index: 15;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.wait-screen.show { opacity: 1; }
+.wait-tag { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--dim2); }
+.wait-num {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 72px; font-weight: 900; color: var(--white);
+  letter-spacing: -4px; line-height: 1;
+  text-shadow: 0 0 30px rgba(240,242,255,0.3);
+  transition: transform 0.1s;
+}
+.wait-sub { font-size: 11px; color: var(--dim2); letter-spacing: 1px; }
+
+/* Win toast */
+.win-toast {
+  position: absolute; top: 18px; left: 50%; transform: translateX(-50%);
+  background: linear-gradient(135deg, rgba(0,214,143,0.15), rgba(0,214,143,0.08));
+  border: 1px solid rgba(0,214,143,0.35);
+  padding: 10px 28px; border-radius: 12px;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 16px; font-weight: 700; color: var(--green);
+  opacity: 0; pointer-events: none; z-index: 30;
+  white-space: nowrap; backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(0,214,143,0.2);
+  transition: opacity 0.3s, transform 0.3s;
+  transform: translateX(-50%) translateY(-4px);
+}
+.win-toast.show { opacity:1; transform: translateX(-50%) translateY(0); }
+
+/* ══ SIDE PANEL ══ */
+.side {
+  background: var(--bg2);
+  border-left: 1px solid rgba(255,255,255,0.05);
+  display: flex; flex-direction: column; overflow: hidden;
+}
+
+/* Bet panel */
+.bet-panel {
+  padding: 18px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  flex-shrink: 0;
+}
+
+.panel-tag {
+  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--dim2); margin-bottom: 12px; font-weight: 600;
+}
+
+/* Amount input */
+.amount-box {
+  background: var(--bg3);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px; overflow: hidden; margin-bottom: 10px;
+  display: flex; align-items: center;
+  transition: border-color 0.2s;
+}
+.amount-box:focus-within { border-color: rgba(245,200,66,0.3); }
+.amt-btn {
+  background: none; border: none; width: 44px; height: 48px;
+  color: var(--dim2); font-size: 22px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: color 0.2s; font-family: 'DM Sans', sans-serif;
+}
+.amt-btn:hover { color: var(--white); }
+.amt-inp {
+  flex: 1; background: none; border: none;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 18px; font-weight: 700;
+  color: var(--white); text-align: center; outline: none; width: 0;
+}
+.amt-curr { font-size: 11px; color: var(--usdt); font-weight: 600; padding-right: 14px; letter-spacing: 0.3px; }
+
+/* Quick amounts */
+.quick-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 6px; margin-bottom: 14px; }
+.qb {
+  background: var(--bg3); border: 1px solid rgba(255,255,255,0.06);
+  color: var(--dim2); font-family: 'Unbounded', sans-serif;
+  font-size: 10px; font-weight: 700;
+  padding: 8px 4px; border-radius: 8px; cursor: pointer;
+  text-align: center; transition: all 0.15s;
+}
+.qb:hover { border-color: rgba(245,200,66,0.3); color: var(--gold); background: rgba(245,200,66,0.05); }
+.qb:active { transform: scale(0.96); }
+
+/* Auto cashout */
+.auto-row {
+  display: flex; align-items: center;
+  background: var(--bg3); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px; padding: 10px 14px; margin-bottom: 14px; gap: 10px;
+}
+.auto-label { font-size: 12px; color: var(--dim2); flex: 1; }
+.auto-inp {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px; color: var(--white);
+  font-family: 'Unbounded', sans-serif; font-size: 12px; font-weight: 700;
+  padding: 5px 8px; width: 64px; text-align: center; outline: none;
+}
+.tog {
+  width: 38px; height: 22px; border-radius: 11px;
+  background: var(--dim); position: relative; cursor: pointer;
+  transition: background 0.25s; border: none; flex-shrink: 0;
+}
+.tog::after {
+  content: ''; position: absolute;
+  width: 16px; height: 16px; background: white;
+  border-radius: 50%; top: 3px; left: 3px;
+  transition: transform 0.25s; box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+.tog.on { background: var(--green); }
+.tog.on::after { transform: translateX(16px); }
+
+/* Main button */
+.main-btn {
+  width: 100%; height: 56px; border: none; border-radius: 14px;
+  font-family: 'Unbounded', sans-serif; font-size: 14px; font-weight: 700;
+  cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden;
+  letter-spacing: 0.3px;
+}
+.main-btn::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.12), transparent);
+  pointer-events: none;
+}
+.main-btn.s-bet {
+  background: linear-gradient(135deg, #00d68f, #00a06a);
+  color: #003020;
+  box-shadow: 0 4px 24px rgba(0,214,143,0.35);
+}
+.main-btn.s-cashout {
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  color: #1a0d00;
+  box-shadow: 0 4px 24px rgba(245,200,66,0.4);
+  animation: glow-pulse 1s ease infinite;
+}
+@keyframes glow-pulse {
+  0%,100%{ box-shadow:0 4px 24px rgba(245,200,66,0.4) }
+  50%{ box-shadow:0 4px 40px rgba(245,200,66,0.7), 0 0 60px rgba(245,200,66,0.2) }
+}
+.main-btn.s-cancel { background: var(--bg4); color: var(--red); border: 1px solid rgba(255,68,102,0.25); }
+.main-btn.s-wait   { background: var(--bg3); color: var(--dim2); cursor: not-allowed; }
+.main-btn:hover:not(.s-wait) { transform: translateY(-2px); }
+.main-btn:active:not(.s-wait) { transform: translateY(0); }
+.btn-sub { display: block; font-size: 10px; font-weight: 400; opacity: 0.65; margin-top: 2px; font-family: 'DM Sans', sans-serif; }
+
+/* Players */
+.players-wrap { flex:1; overflow:hidden; display:flex; flex-direction:column; min-height:0; }
+.players-head {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 16px 8px;
+}
+.online-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--green);
+  box-shadow: 0 0 6px var(--green); animation: blink 2s ease infinite;
+  display: inline-block; margin-right: 6px;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
+.online-num { font-family: 'Unbounded', sans-serif; font-size: 11px; color: var(--green); font-weight: 700; }
+
+.players-list { flex:1; overflow-y:auto; scrollbar-width:none; padding: 0 10px 10px; }
+.players-list::-webkit-scrollbar { display:none; }
+
+.prow {
+  display: flex; align-items: center; padding: 7px 8px;
+  border-radius: 8px; gap: 8px; transition: background 0.2s;
+  margin-bottom: 1px;
+}
+.prow:hover { background: rgba(255,255,255,0.03); }
+.pavatar {
+  width: 26px; height: 26px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; flex-shrink: 0; font-weight: 700;
+  font-family: 'Unbounded', sans-serif;
+}
+.pname { flex:1; font-size: 11px; color: var(--dim2); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.pamt { font-family:'Unbounded',monospace; font-size: 11px; color: var(--white); font-weight: 700; min-width: 52px; text-align: right; }
+.pbadge { font-family:'Unbounded',monospace; font-size: 10px; font-weight: 700; min-width: 50px; text-align: right; }
+.pbadge.w { color: var(--green); } .pbadge.f { color: var(--gold); } .pbadge.l { color: var(--red); }
+
+/* Separator */
+.sep { height: 1px; background: rgba(255,255,255,0.04); margin: 0 16px; }
+
+@media (max-width:700px) {
+  .main { grid-template-columns:1fr; grid-template-rows:1fr auto; }
+  .side { border-left:none; border-top:1px solid rgba(255,255,255,0.06); max-height:47vh; }
+  .players-wrap { display:none; }
+  .header-center { display:none; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <span class="logo-icon">🎈</span>
+    <span class="logo-text">Взрывной Чууу</span>
+  </div>
+  <div class="header-center">
+    <button class="htab active">Игра</button>
+    <button class="htab">Ставки</button>
+    <button class="htab">Топ</button>
+  </div>
+  <div class="balance-area">
+    <div class="bal-box">
+      <span class="bal-icon">💎</span>
+      <span class="bal-num" id="balNum">1 000.00</span>
+      <span class="bal-curr">USDT</span>
+    </div>
+    <button class="add-btn" title="Пополнить">+</button>
+  </div>
+</header>
+
+<!-- HISTORY -->
+<div class="history-wrap">
+  <span class="hist-label">История</span>
+  <div class="hist-scroll" id="histScroll"></div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- GAME -->
+  <div class="game-area">
+    <canvas id="gc"></canvas>
+
+    <div class="mult-wrap" id="mWrap">
+      <div class="mult-num" id="mNum" style="color:var(--green)">1.00x</div>
+      <div class="mult-tag" id="mTag">СТАВКИ ПРИНИМАЮТСЯ</div>
+    </div>
+
+    <div class="crash-screen" id="crashScr">
+      <div class="crash-emoji">💥</div>
+      <div class="crash-label">ВЗОРВАЛСЯ!</div>
+      <div class="crash-at" id="crashAt">@ 1.00x</div>
+    </div>
+
+    <div class="wait-screen" id="waitScr">
+      <div class="wait-tag">До старта</div>
+      <div class="wait-num" id="waitNum">10</div>
+      <div class="wait-sub">секунд · ставки открыты</div>
+    </div>
+
+    <div class="win-toast" id="winToast">+0.00 USDT</div>
+  </div>
+
+  <!-- SIDE -->
+  <div class="side">
+    <div class="bet-panel">
+      <div class="panel-tag">Сумма ставки</div>
+
+      <div class="amount-box">
+        <button class="amt-btn" onclick="adj(-5)">−</button>
+        <input class="amt-inp" id="betInp" type="number" value="10" min="0.1" step="0.1">
+        <span class="amt-curr">USDT</span>
+        <button class="amt-btn" onclick="adj(5)">+</button>
+      </div>
+
+      <div class="quick-grid">
+        <div class="qb" onclick="sb(1)">1</div>
+        <div class="qb" onclick="sb(5)">5</div>
+        <div class="qb" onclick="sb(10)">10</div>
+        <div class="qb" onclick="sb(50)">50</div>
+      </div>
+
+      <div class="auto-row">
+        <span class="auto-label">Авто-вывод при</span>
+        <input class="auto-inp" id="autoInp" type="number" value="2.00" min="1.01" step="0.1">
+        <span style="font-size:11px;color:var(--dim2);margin-right:2px">x</span>
+        <button class="tog" id="togBtn" onclick="toggleAuto()"></button>
+      </div>
+
+      <button class="main-btn s-bet" id="mBtn" data-state="bet" onclick="handleBtn()">
+        ПОСТАВИТЬ
+        <span class="btn-sub" id="bSub">10 USDT</span>
+      </button>
+    </div>
+
+    <div class="sep"></div>
+
+    <div class="players-wrap">
+      <div class="players-head">
+        <div style="display:flex;align-items:center">
+          <span class="online-dot"></span>
+          <span class="panel-tag" style="margin:0">Игроки онлайн</span>
+        </div>
+        <span class="online-num" id="onlineNum">—</span>
+      </div>
+      <div class="players-list" id="pList"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════
+//  CONSTANTS & STATE
+// ═══════════════════════════════════════
+const ST = { WAIT:'wait', FLY:'fly', CRASH:'crash' };
+
+let gs = ST.WAIT;
+let balance   = 1000;
+let playerBet = 0, cashedOut = false, autoOn = false;
+let mult = 1.00, crashAt = 2.0;
+let waitSec = 10, waitTimer = null, raf = null;
+let t0 = 0; // fly start time
+let history = [], fakePlayers = [];
+
+// Canvas
+const cv = document.getElementById('gc');
+const cx = cv.getContext('2d');
+
+// Balloon physics
+let bx = 0, by = 0;     // center
+let br = 0;              // current radius
+let maxBR = 0;           // radius at crash point
+let wobT  = 0;           // wobble timer
+let particles = [];      // ambient floating particles
+let confetti  = [];      // burst on crash
+let shx = 0, shy = 0;   // shake on danger
+
+// ═══════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════
+function init() {
+  resize(); window.addEventListener('resize', resize);
+  document.getElementById('betInp').addEventListener('input', refreshSub);
+  buildHistory(); buildFake(); renderPlayers();
+  startWait();
+}
+
+function resize() {
+  cv.width  = cv.parentElement.clientWidth;
+  cv.height = cv.parentElement.clientHeight;
+  bx = cv.width  * 0.5;
+  by = cv.height * 0.58;
+  maxBR = Math.min(cv.width, cv.height) * 0.36;
+}
+
+// ═══════════════════════════════════════
+//  CRASH POINT — 3× SLOWER
+//  Using exponent 0.022 instead of 0.065
+// ═══════════════════════════════════════
+function genCrash() {
+  const r = Math.random();
+  if (r < 0.27) return 1   + Math.random() * 0.5;
+  if (r < 0.58) return 1.5 + Math.random() * 1.5;
+  if (r < 0.80) return 3   + Math.random() * 7;
+  if (r < 0.95) return 10  + Math.random() * 40;
+  return 50 + Math.random() * 150;
+}
+
+// ═══════════════════════════════════════
+//  WAIT PHASE
+// ═══════════════════════════════════════
+function startWait() {
+  gs = ST.WAIT; mult = 1.00;
+  playerBet = 0; cashedOut = false;
+  crashAt = genCrash(); confetti = [];
+  br = 22;
+
+  el('mWrap').style.opacity = '1';
+  setMult(1.00, 'var(--dim2)');
+  el('mTag').textContent = 'СТАВКИ ПРИНИМАЮТСЯ';
+  el('crashScr').classList.remove('show');
+  el('waitScr').classList.add('show');
+  setBtnState('bet');
+  shuffleFake(); renderPlayers();
+
+  waitSec = 10;
+  el('waitNum').textContent = waitSec;
+  clearInterval(waitTimer);
+  waitTimer = setInterval(() => {
+    waitSec--;
+    const wn = el('waitNum');
+    wn.textContent = waitSec;
+    wn.style.transform = 'scale(1.15)';
+    setTimeout(() => wn.style.transform = 'scale(1)', 200);
+    if (waitSec <= 0) { clearInterval(waitTimer); startFly(); }
+  }, 1000);
+
+  cancelAnimationFrame(raf);
+  loopWait();
+}
+
+function loopWait() {
+  if (gs !== ST.WAIT) return;
+  const w = cv.width, h = cv.height;
+  cx.clearRect(0,0,w,h);
+  drawBg(w,h);
+  wobT += 0.025;
+  // small idle balloon, gently pulsing
+  const pulse = 22 + Math.sin(wobT * 1.2) * 4;
+  drawBalloon(bx, by, pulse, 0, true);
+  updateParticles(w, h);
+  raf = requestAnimationFrame(loopWait);
+}
+
+// ═══════════════════════════════════════
+//  FLY PHASE
+// ═══════════════════════════════════════
+function startFly() {
+  gs = ST.FLY; t0 = performance.now();
+  el('waitScr').classList.remove('show');
+  el('mTag').textContent = 'НАДУВАЕТСЯ';
+
+  if (el('mBtn').dataset.queued === '1') {
+    activateBet(); el('mBtn').dataset.queued = '';
+  }
+
+  cancelAnimationFrame(raf);
+  loopFly();
+}
+
+function loopFly() {
+  const elapsed = (performance.now() - t0) / 1000;
+  // SLOW: exponent 0.022 → 3× slower than original 0.065
+  mult = Math.round(Math.pow(1.022, elapsed * 10) * 100) / 100;
+
+  if (mult >= crashAt) {
+    mult = Math.round(crashAt * 100) / 100;
+    doCrash(); return;
+  }
+
+  // Color by mult
+  let col = 'var(--green)';
+  if (mult > 2)  col = '#80e000';
+  if (mult > 3)  col = 'var(--gold)';
+  if (mult > 7)  col = '#ff9800';
+  if (mult > 15) col = '#ff6bc8';
+  if (mult > 40) col = 'var(--teal)';
+  setMult(mult, col);
+
+  // Auto-cashout
+  if (autoOn && playerBet > 0 && !cashedOut) {
+    const target = parseFloat(el('autoInp').value) || 2;
+    if (mult >= target) cashout();
+  }
+
+  const prog = Math.min((mult - 1) / Math.max(crashAt - 1, 0.01), 1);
+  const r = 22 + prog * (maxBR - 22);
+  wobT += 0.035;
+
+  // Danger shake
+  if (prog > 0.78) {
+    const intensity = (prog - 0.78) / 0.22;
+    shx = (Math.random()-0.5) * intensity * 18;
+    shy = (Math.random()-0.5) * intensity * 12;
+  } else { shx = 0; shy = 0; }
+
+  const w = cv.width, h = cv.height;
+  cx.clearRect(0,0,w,h);
+  drawBg(w,h);
+  updateParticles(w,h);
+  drawBalloon(bx + shx, by + shy, r, prog, false);
+
+  raf = requestAnimationFrame(loopFly);
+}
+
+// ═══════════════════════════════════════
+//  CRASH
+// ═══════════════════════════════════════
+function doCrash() {
+  gs = ST.CRASH;
+  cancelAnimationFrame(raf);
+
+  el('mWrap').style.opacity = '0';
+  el('crashScr').classList.add('show');
+  el('crashAt').textContent = `@ ${mult.toFixed(2)}x`;
+
+  spawnConfetti();
+  addHistory(mult);
+  fakesAfterCrash();
+  renderPlayers();
+  setBtnState('wait');
+
+  let cf = 0;
+  const loopCrash = () => {
+    const w = cv.width, h = cv.height;
+    cx.clearRect(0,0,w,h);
+    drawBg(w,h);
+    drawConfetti(w,h);
+    cf++;
+    if (cf < 150) requestAnimationFrame(loopCrash);
+  };
+  requestAnimationFrame(loopCrash);
+
+  setTimeout(startWait, 3800);
+}
+
+// ═══════════════════════════════════════
+//  BALLOON DRAWING
+// ═══════════════════════════════════════
+function balloonHue(prog) {
+  // green(120) → yellow(60) → orange(30) → red(0)
+  const h = 120 - prog * 125;
+  const s = 75 + prog * 15;
+  const l = 48 + prog * 8;
+  return `hsl(${h},${s}%,${l}%)`;
+}
+
+function drawBalloon(x, y, r, prog, idle) {
+  const col = idle ? 'hsl(120,70%,52%)' : balloonHue(prog);
+
+  // ── Ambient glow ──
+  cx.save();
+  const glowR = r * 1.8;
+  const grd = cx.createRadialGradient(x, y, r * 0.3, x, y, glowR);
+  const glowA = idle ? 0.12 : 0.18 + prog * 0.15;
+  grd.addColorStop(0, col.replace('hsl','hsla').replace(')',`,${glowA})`));
+  grd.addColorStop(1, 'transparent');
+  cx.fillStyle = grd;
+  cx.beginPath();
+  cx.arc(x, y, glowR, 0, Math.PI*2);
+  cx.fill();
+  cx.restore();
+
+  // ── Wobble shape ──
+  const wx = r * (1 + Math.sin(wobT) * 0.035);
+  const wy = r * (1 + Math.cos(wobT * 0.8) * 0.035);
+
+  // ── Main body gradient ──
+  cx.save();
+  const bg = cx.createRadialGradient(x - wx*0.32, y - wy*0.28, wx*0.05, x, y, wx*1.15);
+  bg.addColorStop(0, lightenHSL(col, 35));
+  bg.addColorStop(0.45, col);
+  bg.addColorStop(1,  darkenHSL(col, 28));
+  cx.shadowColor = col;
+  cx.shadowBlur  = 28 + prog * 20;
+  cx.beginPath();
+  cx.ellipse(x, y, wx, wy, 0, 0, Math.PI*2);
+  cx.fillStyle = bg;
+  cx.fill();
+  cx.restore();
+
+  // ── Shiny highlight ──
+  cx.save();
+  const hl = cx.createRadialGradient(x - wx*0.36, y - wy*0.34, 0, x - wx*0.34, y - wy*0.3, wx*0.52);
+  hl.addColorStop(0, 'rgba(255,255,255,0.55)');
+  hl.addColorStop(0.6, 'rgba(255,255,255,0.12)');
+  hl.addColorStop(1, 'rgba(255,255,255,0)');
+  cx.beginPath();
+  cx.ellipse(x - wx*0.28, y - wy*0.3, wx*0.42, wy*0.35, -0.3, 0, Math.PI*2);
+  cx.fillStyle = hl;
+  cx.fill();
+  cx.restore();
+
+  // ── Subtle edge rim ──
+  cx.save();
+  cx.beginPath();
+  cx.ellipse(x, y, wx, wy, 0, 0, Math.PI*2);
+  cx.strokeStyle = 'rgba(0,0,0,0.18)';
+  cx.lineWidth = 1.5;
+  cx.stroke();
+  cx.restore();
+
+  // ── Knot ──
+  cx.save();
+  cx.fillStyle = darkenHSL(col, 20);
+  cx.shadowColor = 'rgba(0,0,0,0.4)'; cx.shadowBlur = 4;
+  cx.beginPath();
+  cx.ellipse(x, y + wy + 4, 5, 7, 0, 0, Math.PI*2);
+  cx.fill();
+  cx.restore();
+
+  // ── String ──
+  cx.save();
+  cx.strokeStyle = 'rgba(255,255,255,0.22)';
+  cx.lineWidth = 1.5; cx.lineCap = 'round';
+  const sx = x + Math.sin(wobT * 0.6) * 6;
+  cx.beginPath();
+  cx.moveTo(x, y + wy + 10);
+  cx.bezierCurveTo(sx, y + wy + r*0.5, x - 12, y + wy + r*0.9, x + Math.sin(wobT)*10, y + wy + r*1.3);
+  cx.stroke();
+  cx.restore();
+
+  // ── Text "Чууууу" ──
+  cx.save();
+  const fs = Math.max(10, r * 0.3);
+  cx.font = `800 ${fs}px 'Unbounded', sans-serif`;
+  cx.textAlign = 'center'; cx.textBaseline = 'middle';
+  // Shadow
+  cx.fillStyle = 'rgba(0,0,0,0.4)';
+  cx.fillText('Чууууу', x+1.5, y+1.5);
+  // Main text
+  cx.fillStyle = 'rgba(255,255,255,0.9)';
+  cx.fillText('Чууууу', x, y);
+  cx.restore();
+
+  // ── Danger rings ──
+  if (!idle && prog > 0.7) {
+    const alpha = (prog - 0.7) / 0.3;
+    for (let i = 1; i <= 2; i++) {
+      cx.save();
+      cx.globalAlpha = alpha * (0.6 / i);
+      cx.strokeStyle = `rgba(255,68,102,1)`;
+      cx.lineWidth = 2;
+      cx.setLineDash([6, 5]);
+      cx.lineDashOffset = -wobT * 20;
+      cx.beginPath();
+      cx.ellipse(x, y, wx + i*14, wy + i*14, 0, 0, Math.PI*2);
+      cx.stroke();
+      cx.restore();
+    }
+    // Pulsing overlay
+    cx.save();
+    cx.globalAlpha = alpha * 0.04;
+    cx.fillStyle = '#ff4466';
+    cx.beginPath();
+    cx.arc(x, y, maxBR * 1.5, 0, Math.PI*2);
+    cx.fill();
+    cx.restore();
+  }
+}
+
+// ═══════════════════════════════════════
+//  BACKGROUND
+// ═══════════════════════════════════════
+function drawBg(w, h) {
+  // Grid
+  cx.strokeStyle = 'rgba(255,255,255,0.025)';
+  cx.lineWidth = 1;
+  for (let xi = 0; xi < w; xi += 64) { cx.beginPath(); cx.moveTo(xi,0); cx.lineTo(xi,h); cx.stroke(); }
+  for (let yi = 0; yi < h; yi += 54) { cx.beginPath(); cx.moveTo(0,yi); cx.lineTo(w,yi); cx.stroke(); }
+
+  // Subtle vignette
+  const vig = cx.createRadialGradient(w/2, h/2, h*0.3, w/2, h/2, h*0.9);
+  vig.addColorStop(0, 'transparent');
+  vig.addColorStop(1, 'rgba(7,8,15,0.35)');
+  cx.fillStyle = vig;
+  cx.fillRect(0,0,w,h);
+}
+
+// ═══════════════════════════════════════
+//  AMBIENT PARTICLES
+// ═══════════════════════════════════════
+function updateParticles(w, h) {
+  // Spawn
+  if (particles.length < 25 && Math.random() < 0.15) {
+    particles.push({
+      x: Math.random() * w, y: h + 10,
+      vx: (Math.random()-0.5)*0.6, vy: -(0.4 + Math.random()*0.8),
+      r: 1 + Math.random()*2.5,
+      a: 0.15 + Math.random()*0.25,
+      col: ['var(--green)','var(--gold)','var(--teal)','#fff'][Math.floor(Math.random()*4)]
+    });
+  }
+  particles = particles.filter(p => p.y > -10 && p.a > 0);
+  particles.forEach(p => {
+    p.x += p.vx; p.y += p.vy; p.a -= 0.003;
+    cx.save();
+    cx.globalAlpha = p.a;
+    cx.fillStyle = p.col;
+    cx.shadowColor = p.col; cx.shadowBlur = 6;
+    cx.beginPath(); cx.arc(p.x, p.y, p.r, 0, Math.PI*2); cx.fill();
+    cx.restore();
+  });
+}
+
+// ═══════════════════════════════════════
+//  CONFETTI
+// ═══════════════════════════════════════
+const COLS = ['#ff4466','#ffd600','#00d68f','#ff6bc8','#4488ff','#ff9800','#00e5cc','#e040fb'];
+function spawnConfetti() {
+  confetti = [];
+  for (let i = 0; i < 140; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    const spd = 3 + Math.random() * 12;
+    confetti.push({
+      x:bx, y:by,
+      vx: Math.cos(angle)*spd, vy: Math.sin(angle)*spd - 4,
+      r: 3 + Math.random()*7,
+      col: COLS[i%COLS.length],
+      rot: Math.random()*Math.PI*2, rotV:(Math.random()-0.5)*0.25,
+      life: 1, isRect: i%3!==0
+    });
+  }
+}
+function drawConfetti(w,h) {
+  confetti.forEach(p => {
+    p.x+=p.vx; p.y+=p.vy; p.vy+=0.22; p.vx*=0.99;
+    p.rot+=p.rotV; p.life-=0.01;
+    if (p.life<=0) return;
+    cx.save();
+    cx.globalAlpha = Math.max(0, p.life);
+    cx.translate(p.x,p.y); cx.rotate(p.rot);
+    cx.fillStyle = p.col;
+    cx.shadowColor = p.col; cx.shadowBlur = 5;
+    if (p.isRect) cx.fillRect(-p.r/2,-p.r*1.6,p.r,p.r*3.2);
+    else { cx.beginPath(); cx.arc(0,0,p.r,0,Math.PI*2); cx.fill(); }
+    cx.restore();
+  });
+}
+
+// ═══════════════════════════════════════
+//  COLOR HELPERS
+// ═══════════════════════════════════════
+function lightenHSL(hsl, amt) { return hsl.replace(/(\d+)%\)$/,(_,l)=>`${Math.min(100,+l+amt)}%)`); }
+function darkenHSL(hsl, amt)  { return hsl.replace(/(\d+)%\)$/,(_,l)=>`${Math.max(0,+l-amt)}%)`); }
+
+// ═══════════════════════════════════════
+//  PLAYER ACTIONS
+// ═══════════════════════════════════════
+function handleBtn() {
+  const st = el('mBtn').dataset.state;
+  if (st==='bet')          gs===ST.FLY ? activateBet() : queueBet();
+  else if (st==='cashout') cashout();
+  else if (st==='cancel')  { el('mBtn').dataset.queued=''; setBtnState('bet'); }
+}
+
+function queueBet() {
+  const amt = getAmt();
+  if (amt > balance) return shakeBtn();
+  el('mBtn').dataset.queued = '1';
+  el('mBtn').dataset.state  = 'cancel';
+  el('mBtn').className = 'main-btn s-cancel';
+  el('mBtn').innerHTML = 'В ОЧЕРЕДИ <span class="btn-sub">Начнётся в следующем раунде</span>';
+}
+
+function activateBet() {
+  const amt = getAmt();
+  if (amt > balance) return shakeBtn();
+  if (playerBet > 0) return;
+  balance -= amt; playerBet = amt;
+  updBal(); setBtnState('cashout');
+}
+
+function cashout() {
+  if (!playerBet || cashedOut || gs !== ST.FLY) return;
+  cashedOut = true;
+  const win = playerBet * mult;
+  balance += win; updBal();
+  const profit = (win - playerBet).toFixed(2);
+  toast(`+${profit} USDT  ×${mult.toFixed(2)}`);
+  setBtnState('wait');
+}
+
+function getAmt()   { return Math.max(0.1, parseFloat(el('betInp').value)||10); }
+function adj(d)     { el('betInp').value = Math.max(0.1, Math.round((parseFloat(el('betInp').value)||0)+d)*100)/100; refreshSub(); }
+function sb(v)      { el('betInp').value = v; refreshSub(); }
+function toggleAuto(){ autoOn=!autoOn; el('togBtn').classList.toggle('on',autoOn); }
+
+// ═══════════════════════════════════════
+//  UI HELPERS
+// ═══════════════════════════════════════
+function setBtnState(s) {
+  const btn = el('mBtn');
+  btn.dataset.state = s; btn.dataset.queued = '';
+  if (s==='bet') {
+    btn.className='main-btn s-bet';
+    btn.innerHTML=`ПОСТАВИТЬ<span class="btn-sub">${getAmt()} USDT</span>`;
+  } else if (s==='cashout') {
+    btn.className='main-btn s-cashout';
+    btn.innerHTML=`ВЫВЕСТИ 🎈<span class="btn-sub" id="cSub">${playerBet.toFixed(2)} USDT</span>`;
+    const up=()=>{ if(gs!==ST.FLY||cashedOut)return; const s=el('cSub'); if(s)s.textContent=(playerBet*mult).toFixed(2)+' USDT'; requestAnimationFrame(up); };
+    requestAnimationFrame(up);
+  } else if (s==='wait') {
+    btn.className='main-btn s-wait';
+    btn.innerHTML=`ОЖИДАЕМ...<span class="btn-sub">Следующий раунд</span>`;
+  }
+}
+function refreshSub() { if(el('mBtn').dataset.state==='bet') setBtnState('bet'); }
+function setMult(v,col) { el('mNum').textContent=v.toFixed(2)+'x'; el('mNum').style.color=col; }
+function updBal()       { el('balNum').textContent=balance.toFixed(2); }
+function toast(txt) {
+  const t=el('winToast'); t.textContent=txt; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+function shakeBtn() {
+  const b=el('mBtn'); b.style.animation='crashPop 0.4s ease';
+  setTimeout(()=>b.style.animation='',400);
+}
+function el(id) { return document.getElementById(id); }
+
+// ═══════════════════════════════════════
+//  HISTORY
+// ═══════════════════════════════════════
+function buildHistory() {
+  [1.18,6.72,1.03,3.91,27.4,1.55,9.2,1.07,2.81,52.3,1.22,7.1,1.44,4.5,18.2].forEach(addHistory);
+}
+function addHistory(v) {
+  history.unshift(v); if(history.length>20) history.pop(); renderHistory();
+}
+function renderHistory() {
+  el('histScroll').innerHTML = history.map(v=>{
+    let c='hp-low';
+    if(v>=2&&v<5) c='hp-mid'; else if(v>=5&&v<20) c='hp-high'; else if(v>=20) c='hp-moon';
+    return `<div class="hp ${c}">${v.toFixed(2)}x</div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════
+//  FAKE PLAYERS
+// ═══════════════════════════════════════
+const NAMES=['Lucky***88','Whale_K','Pro***21','Moon_X','Degen***4','Bet***77','Rich_P','HODL***9','CryptoQ','Bull***3','Bear_W','Chad***66','NGMI_55','Ape***12','Frog_Z'];
+const AVATARS=['🦊','🐺','🦁','🐯','🦅','🐉','🦋','🐸','🤖','👾','🎭','🎪','🎯','🏆','💎'];
+
+function buildFake() {
+  fakePlayers = Array.from({length:12},(_,i)=>mkFake(i));
+}
+function mkFake(i) {
+  return {
+    name: NAMES[i%NAMES.length],
+    ico:  AVATARS[i%AVATARS.length],
+    amt:  [0.5,1,2,5,10,25,50,100][Math.floor(Math.random()*8)],
+    col:  `hsl(${Math.floor(Math.random()*360)},60%,55%)`,
+    status:'fly', co:null
+  };
+}
+function shuffleFake() {
+  const n = 8 + Math.floor(Math.random()*8);
+  fakePlayers = Array.from({length:n},(_,i)=>mkFake(i));
+  el('onlineNum').textContent = (n+(playerBet>0?1:0))+'';
+}
+function fakesAfterCrash() {
+  fakePlayers.forEach(p=>{
+    if(p.co) return;
+    if(Math.random()<0.42){ p.co=(1+Math.random()*(mult-1)).toFixed(2); p.status='won'; }
+    else p.status='lost';
+  });
+}
+function renderPlayers() {
+  let rows = fakePlayers.map(p=>{
+    let b='...', c='f';
+    if(p.status==='won'){b=p.co+'x';c='w';}
+    if(p.status==='lost'){b='💥';c='l';}
+    return `<div class="prow">
+      <div class="pavatar" style="background:${p.col}22;color:${p.col}">${p.ico}</div>
+      <span class="pname">${p.name}</span>
+      <span class="pamt">${p.amt}</span>
+      <span class="pbadge ${c}">${b}</span>
+    </div>`;
+  });
+  if(playerBet>0){
+    const b=cashedOut?`${mult.toFixed(2)}x`:(gs===ST.CRASH?'💥':'...');
+    const c=cashedOut?'w':(gs===ST.CRASH?'l':'f');
+    rows.unshift(`<div class="prow" style="background:rgba(0,214,143,0.06);border-radius:8px;border:1px solid rgba(0,214,143,0.15)">
+      <div class="pavatar" style="background:rgba(0,214,143,0.15);color:var(--green)">😎</div>
+      <span class="pname" style="color:var(--green)">Вы</span>
+      <span class="pamt">${playerBet}</span>
+      <span class="pbadge ${c}">${b}</span>
+    </div>`);
+  }
+  el('pList').innerHTML=rows.join('');
+}
+
+init();
+</script>
+</body>
+</html>
